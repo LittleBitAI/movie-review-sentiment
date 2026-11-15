@@ -13,8 +13,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY --from=export /app/model/int8.onnx /app/model/tokenizer.json model/
 COPY main.py sentiment.py ./
-# DB 파일을 남기려면 실행할 때 /data에 볼륨을 연결한다. Hugging Face Spaces는 root가 아닌 사용자로 실행해 쓰기 권한을 열어 둔다.
-RUN mkdir -m 777 /data
+# DB 파일은 /data에 둔다. 컨테이너를 지워도 남기려면 실행할 때 이 경로에 볼륨을 연결한다.
+RUN mkdir /data
 ENV DB_PATH=/data/movies.db
 EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
