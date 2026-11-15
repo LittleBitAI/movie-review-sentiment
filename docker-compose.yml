@@ -1,0 +1,15 @@
+# docker compose up --build 후 화면은 http://localhost:8501, API 문서는 http://localhost:8000/docs
+name: movie-review  # 폴더 이름(1팀_김민기)에서 만든 기본 프로젝트 이름은 이미지 태그로 쓸 수 없다
+services:
+  backend:
+    build: backend
+    ports: ["8000:8000"]
+    volumes: ["db:/data"]  # 컨테이너를 지워도 영화와 리뷰가 남는다
+  frontend:
+    build: frontend
+    ports: ["8501:8501"]
+    environment:
+      BACKEND_URL: http://backend:8000
+    depends_on: [backend]
+volumes:
+  db:

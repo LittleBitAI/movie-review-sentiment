@@ -1,0 +1,6 @@
+# 서버 실행용. 추론은 onnxruntime으로 하므로 PyTorch는 넣지 않는다.
+fastapi==0.137.1
+uvicorn==0.49.0
+onnxruntime==1.30.0
+tokenizers==0.22.2
+numpy==2.3.5
